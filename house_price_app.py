@@ -8,7 +8,14 @@ st.set_page_config(page_title="house price prediction",page_icon= "📚",layout=
 st.title("house price prediction app")
 
 #load data
-model = pickle.load(open("house_model.pkl","rb"))
+import pickle
+import streamlit as st
+
+try:
+    with open("house_model.pkl", "rb") as f:
+        model = pickle.load(f)
+except Exception as e:
+    st.error(f"Model loading failed: {e}")
 
 #layout(side-by-side input and output)
 col1, col2 = st.columns(2)
